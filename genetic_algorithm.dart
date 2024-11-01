@@ -28,6 +28,9 @@ class Creature {
   @override
   bool operator ==(Object other) =>
       (other is Creature && this.adaptibility == other.adaptibility);
+
+  @override
+  int get hashCode => adaptibility.hashCode;
 }
 
 //#1- Determine target value
