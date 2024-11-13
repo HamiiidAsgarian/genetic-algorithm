@@ -1,6 +1,6 @@
 import 'dart:math';
 
-// the hill function
+// The hill function
 double objectiveFunction(double x) {
   return (3 * exp(-pow(x - 3, 2) / 0.5) +
       6 * exp(-pow(x - 6, 2) / 0.5) +
@@ -10,9 +10,9 @@ double objectiveFunction(double x) {
 
 (double, double)? hillClimbing() {
   var randomInit = (Random().nextInt(10))
-      .toDouble(); //1 - random double value between 1 to 10
+      .toDouble(); // Init with a random double value between 1 to 10
 
-  print('starting point is $randomInit');
+  print('* starting point is $randomInit');
   var currentPoint = randomInit;
   var stepSize = 0.1;
 
@@ -33,8 +33,9 @@ double objectiveFunction(double x) {
     final rightNeighborOnGraph = objectiveFunction(rightNeighbor);
 
     print(
-        'current is $currentNeighborOnGraph and left is $leftNeighborOnGraph and right is $rightNeighborOnGraph');
+        'Current value is $currentNeighborOnGraph and left is $leftNeighborOnGraph and right is $rightNeighborOnGraph');
 
+//If there is no higher value before and after the current value, the peak is reached
     if (leftNeighborOnGraph < currentNeighborOnGraph &&
         rightNeighborOnGraph < currentNeighborOnGraph) {
       foundHillPeak = true;
@@ -46,10 +47,10 @@ double objectiveFunction(double x) {
 //pick the climbing neighbor as the currentPoint
     if (leftNeighborOnGraph > rightNeighborOnGraph) {
       currentPoint = leftNeighbor;
-      print('--- $currentPoint moving left !!!!!');
+      print('--- $currentPoint Moving left !!!!!');
     } else {
       currentPoint = rightNeighbor;
-      print('--- $currentPoint moving rigth !!!!!');
+      print('--- $currentPoint Moving rigth !!!!!');
     }
   }
   return null;
@@ -61,6 +62,7 @@ void main() {
 
   List<double> localMaximas = [];
 
+//Iterate through the algorithm for several times to get the local maxima
   for (var i = 0; i < numberOfTries; i++) {
     var currentHillPeakValue = hillClimbing();
     var roundedValue =
@@ -74,7 +76,7 @@ void main() {
 
   localMaximas.sort();
 
-  print('\n local maxima: ${localMaximas.toSet()}');
+  print('\n Local maxima: ${localMaximas.toSet()}');
 
   print(
       '\n Global maxima: on point ${sortedByValue.last.keys.first} with value ${sortedByValue.last.values.first}');
